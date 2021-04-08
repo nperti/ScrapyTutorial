@@ -1,4 +1,5 @@
 import scrapy
+from ..items import CototestItem
 
 class ClaroSpider(scrapy.Spider):
     name = 'claro'
@@ -7,9 +8,15 @@ class ClaroSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
+        item = CototestItem()
         planes = response.css('div.plan-item__wrapper')
 
         for plan in planes:
-            price = plan.css('span.plan-item__price__text::text').extract()
-            plan_name = plan.css('span.plan-item__title::text').extract()
-            yield dict(price=price, plan_name=plan_name)
+            price = plan.css('.plan-item__price__text::text').extract()[1]
+            plan_name = plan.css('strong::text').extract()
+            # ejemplo para extraer un attr: response.css('.cfMarker::attr(src)')
+
+            item['price'] = price
+            item['plan_name'] = plan_name
+
+            yield item

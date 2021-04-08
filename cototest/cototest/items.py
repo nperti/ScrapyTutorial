@@ -10,4 +10,6 @@ class CototestItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     price = scrapy.Field()
-    plan_name ) scrapy.Field()
+    plan_name = scrapy.Field()
+
+
