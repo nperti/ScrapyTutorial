@@ -13,8 +13,8 @@ class ClaroSpider(scrapy.Spider):
 
         for plan in planes:
             price = plan.css('.plan-item__price__text::text').extract()[1]
-            plan_name = plan.css('strong::text').extract()
-            # ejemplo para extraer un attr: response.css('.cfMarker::attr(src)')
+            plan_name = plan.css('strong::text').get()
+            # ejemplo para extraer un data-attr: response.css('.cfMarker::attr(src)')
 
             item['price'] = price
             item['plan_name'] = plan_name
